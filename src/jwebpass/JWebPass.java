@@ -13,8 +13,10 @@ public class JWebPass {
         String passLoc = "http://50.28.29.78/~omeglesp/auth.php";
         //Length of codes/passwords
         int passLength = 4;
+        //Delimiter between passwords
+        String passDelim = "|";
         
-        WebReader pass = new WebReader(passLoc, passLength);
+        WebReader pass = new WebReader(passLoc, passLength, passDelim);
         System.out.println(pass.getPasswords());
     }
 }

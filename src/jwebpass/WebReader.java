@@ -16,7 +16,7 @@ public class WebReader {
   String content;
   URLConnection connection;
   ArrayList passwords = new ArrayList();
-    public WebReader(String myURL,int passLength) throws IOException {
+    public WebReader(String myURL,int passLength, String passDelim) throws IOException {
                      System.setProperty("java.net.useSystemProxies", "true");
                      
   
@@ -26,14 +26,25 @@ public class WebReader {
             connection.addRequestProperty("User-Agent", 
         "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
             Scanner scanner = new Scanner(connection.getInputStream());
-            scanner.useDelimiter("\\Z");
+            scanner.useDelimiter(passDelim);
+            if(scanner.hasNext())
+            {   
             content = scanner.next();
-            
-            
+            }
+            else
+            {
+                throw new Exception("No data was returned -- perhaps you are offline?");
+            }
             for (int i = 0; i < content.length(); i += passLength) {
                 passwords.add(content.substring(i, i + passLength));
             }
-        } catch (Exception ex) {
+        } 
+        catch (StringIndexOutOfBoundsException ex)
+        {
+            System.out.println("StringIndexOutOfBoundsException: Your passwords/codes are not the correct length");
+        }
+        catch (Exception ex) {
+            
             ex.printStackTrace();
         }
   
