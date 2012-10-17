@@ -9,8 +9,8 @@ import javax.swing.JPasswordField;
  * @author yasyf
  */
 public class promptResponses {
-    
-public String requestAuth(){
+
+    public String requestAuth() {
         return JOptionPane.showInputDialog(new JPasswordField(), "Enter Your ID Code", "Authentication Needed",
                 JOptionPane.WARNING_MESSAGE);
     }
@@ -23,8 +23,11 @@ public String requestAuth(){
         System.exit(1);
         throw new Exception("Authentication Needed");
     }
-    
-    
 
-    
+    public void successfulAuth() {
+        JOptionPane.showMessageDialog(new JDialog(),
+                "Correct ID Entered!",
+                "Authentication Success",
+                JOptionPane.INFORMATION_MESSAGE);
+    }
 }
