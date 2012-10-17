@@ -16,7 +16,8 @@ public class WebReader {
   String content;
   URLConnection connection;
   ArrayList passwords = new ArrayList();
-    public WebReader(String myURL,int passLength, String passDelim) throws IOException {
+  String passStart;
+    public WebReader(String myURL,int passLength, String passDelimStart, String passDelimEnd) throws IOException {
                      System.setProperty("java.net.useSystemProxies", "true");
                      
   
@@ -26,15 +27,28 @@ public class WebReader {
             connection.addRequestProperty("User-Agent", 
         "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
             Scanner scanner = new Scanner(connection.getInputStream());
-            scanner.useDelimiter(passDelim);
+            scanner.useDelimiter(passDelimStart);
             if(scanner.hasNext())
             {   
-            content = scanner.next();
+            scanner.next();
+            passStart = scanner.next();
             }
             else
             {
                 throw new Exception("No data was returned -- perhaps you are offline?");
             }
+            Scanner secondScan = new Scanner (passStart);
+            secondScan.useDelimiter(passDelimEnd);
+            if(secondScan.hasNext())
+            {   
+            content = secondScan.next();
+            
+            }
+            else
+            {
+                throw new Exception("No data was returned -- perhaps you are offline?");
+            }
+            
             for (int i = 0; i < content.length(); i += passLength) {
                 passwords.add(content.substring(i, i + passLength));
             }
