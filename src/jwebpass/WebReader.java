@@ -13,11 +13,11 @@ import java.util.Scanner;
  */
 public class WebReader {
 
-    String content;
-    URLConnection connection;
-    ArrayList passwords = new ArrayList();
-    String passStart;
-
+  private  String content;
+   private URLConnection connection;
+   private ArrayList passwords = new ArrayList();
+   private String passStart;
+   public static boolean offline = false;
     public WebReader(String myURL, int passLength, String passDelimStart, String passDelimEnd) throws IOException, Exception {
         System.setProperty("java.net.useSystemProxies", "true");
 
@@ -49,12 +49,19 @@ public class WebReader {
             }
         } catch (StringIndexOutOfBoundsException ex) {
             System.out.println("StringIndexOutOfBoundsException: Your passwords/codes are not the correct length");
-            promptResponses responses = new promptResponses();
-            responses.failedAuth("StringIndexOutOfBoundsException: Your passwords/codes are not the correct length");
+            JWebPass.responses.failedAuth("StringIndexOutOfBoundsException: Your passwords/codes are not the correct length");
         } catch (NoRouteToHostException ex) {
             System.out.println("NoRouteToHostException: You or your server is offline!");
-            promptResponses responses = new promptResponses();
-            responses.failedAuth("NoRouteToHostException: You or your server is offline!");
+            if(JWebPass.offlineAlt == false)
+            {
+            JWebPass.responses.failedAuth("NoRouteToHostException: You or your server is offline!");
+            }
+            else
+            {
+                offline = true;
+            }
+         
+            
         } catch (Exception ex) {
 
             ex.printStackTrace();
