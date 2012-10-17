@@ -33,7 +33,7 @@ public class JWebPass {
 
                 if (pass.getPasswords().get(i).equals(entrance)) {
                     i = pass.getPasswords().size();
-                    responses.successfulAuth();
+                    responses.successfulAuth("Correct ID Entered! (".concat(entrance).concat(")"));
                     System.exit(0);
 
                 } else if (i == pass.getPasswords().size() - 1) {

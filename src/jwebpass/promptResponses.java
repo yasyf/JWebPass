@@ -24,9 +24,9 @@ public class promptResponses {
         throw new Exception("Authentication Needed");
     }
 
-    public void successfulAuth() {
+    public void successfulAuth(String message) {
         JOptionPane.showMessageDialog(new JDialog(),
-                "Correct ID Entered!",
+                message,
                 "Authentication Success",
                 JOptionPane.INFORMATION_MESSAGE);
     }
