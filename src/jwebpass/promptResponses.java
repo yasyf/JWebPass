@@ -15,9 +15,9 @@ public class promptResponses {
                 JOptionPane.WARNING_MESSAGE);
     }
 
-    public void failedAuth() throws Exception {
+    public void failedAuth(String message) throws Exception {
         JOptionPane.showMessageDialog(new JDialog(),
-                "Incorrect ID Entered",
+                message,
                 "Authentication Failure",
                 JOptionPane.ERROR_MESSAGE);
         System.exit(1);

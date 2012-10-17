@@ -1,9 +1,6 @@
 package jwebpass;
 
 import java.io.IOException;
-import javax.swing.JDialog;
-import javax.swing.JOptionPane;
-import javax.swing.JPasswordField;
 
 /**
  *
@@ -27,7 +24,7 @@ public class JWebPass {
             //System.out.println(pass.getPasswords());
             String entrance = responses.requestAuth();
             if (entrance.isEmpty()) {
-                responses.failedAuth();
+                responses.failedAuth("Incorrect ID Entered");
             }
             for (int i = 0; i < pass.getPasswords().size(); i++) {
 
@@ -37,7 +34,7 @@ public class JWebPass {
                     System.exit(0);
 
                 } else if (i == pass.getPasswords().size() - 1) {
-                    responses.failedAuth();
+                    responses.failedAuth("Incorrect ID Entered");
                 }
 
             }
@@ -45,7 +42,7 @@ public class JWebPass {
         } catch (NullPointerException ex) {
 
             promptResponses responses = new promptResponses();
-            responses.failedAuth();
+            responses.failedAuth("Incorrect ID Entered");
         }
     }
 }
