@@ -1,6 +1,7 @@
 package jwebpass;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  *
@@ -10,7 +11,7 @@ public class JWebPass {
 
     //VARS//
     //URL of passwords document -- see the below as an example
-    public static String passLoc = "http://50.28.29.78/~omeglesp/auth.php";
+    public static String passLoc = "http://blog.yasyf.com/coding/jwebpassword-protect-java-app-gui-with-server-stored-passwords/";
     //Length of codes/passwords
     public static int passLength = 4;
     //Delimiter at end of passwords 
@@ -40,7 +41,7 @@ public class JWebPass {
             }
             if (WebReader.offline == true) {
                 if (entrance.equals(offlinePass)) {
-                    onSuccess("Correct ID Entered! (".concat(entrance).concat(")"));
+                    onSuccess("Correct ID Entered! (".concat(entrance).concat(")"),pass.getPasswords());
                 } else {
                     onFailure("Incorrect ID Entered");
                 }
@@ -49,7 +50,7 @@ public class JWebPass {
 
                     if (pass.getPasswords().get(i).equals(entrance)) {
                         i = pass.getPasswords().size();
-                        onSuccess("Correct ID Entered! (".concat(entrance).concat(")"));
+                        onSuccess("Correct ID Entered! (".concat(entrance).concat(")"),pass.getPasswords());
 
                     } else if (i == pass.getPasswords().size() - 1) {
                         onFailure("Incorrect ID Entered");
@@ -67,8 +68,9 @@ public class JWebPass {
     }
     //what to execute on success
 
-    public static void onSuccess(String message) {
+    public static void onSuccess(String message, ArrayList passwords) {
         responses.successfulAuth(message);
+        responses.successfulAuth("The codes returned were ".concat(passwords.toString()));
         System.exit(0);
     }
 
