@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.NoRouteToHostException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -60,7 +61,17 @@ public class WebReader {
             }
 
 
-        } catch (Exception ex) {
+        } 
+        catch(UnknownHostException ex)
+        {
+          System.out.println("UnknownHostException: You or your server is offline!");
+            if (JWebPass.offlineAlt == false) {
+                JWebPass.responses.failedAuth("UnknownHostException: You or your server is offline!");
+            } else {
+                offline = true;
+            }  
+        }
+        catch (Exception ex) {
 
             ex.printStackTrace();
         }

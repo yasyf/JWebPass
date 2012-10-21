@@ -19,7 +19,7 @@ public class JWebPass {
     //Delimiter at end of passwords 
     public static String passDelimEnd = "END";
     //if you want an offline backup code
-    public static boolean offlineAlt = true;
+    public static boolean offlineAlt = false;
     public static String offlinePass = "42";
     //use system proxies, only if set
     public static boolean useProxies = true;
